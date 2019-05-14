@@ -1,16 +1,16 @@
-# quizapp
+# Flutter Firebase - The Full Course
 
-A new Flutter project.
+Build a QuizApp from scratch with Flutter 1.5 & Firebase. 
 
-## Getting Started
+[Get it on The App Store](https://itunes.apple.com/us/app/fireship/id1462592372?mt=8)
 
-This project is a starting point for a Flutter application.
+[Get it on Google Play](https://play.google.com/store/apps/details?id=io.fireship.quizapp)
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+<!-- # Branches
 
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.dev/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+1. User Authentication
+2. Firestore Service & State Management
+3. Topics List and Quiz -->
+
+
