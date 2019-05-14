@@ -21,8 +21,7 @@ class MyApp extends StatelessWidget {
           '/': (context) => LoginScreen(),
           '/topics': (context) => TopicsScreen(),
           '/profile': (context) => ProfileScreen(),
-          // '/quiz': (context) => QuizScreen(),
-          // '/about': (context) => AboutScreen(),
+          '/about': (context) => AboutScreen(),
         },
 
         // Theme

@@ -1,5 +1,13 @@
-export 'login.dart';
-export 'topics.dart';
-export 'quiz.dart';
-export 'profile.dart';
-export 'about.dart';
+import 'package:flutter/material.dart';
+
+class AboutScreen extends StatelessWidget {
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('about'), backgroundColor: Colors.blue),
+
+      body: Center(child: Text('About this app...'),),
+    );
+  }
+}
