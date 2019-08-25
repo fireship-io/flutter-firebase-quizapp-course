@@ -13,8 +13,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        StreamProvider<Report>.value(stream: Global.reportRef.documentStream),
-        StreamProvider<FirebaseUser>.value(stream: AuthService().user),
+        StreamProvider<Report>.value(value: Global.reportRef.documentStream),
+        StreamProvider<FirebaseUser>.value(value: AuthService().user),
       ],
       child: MaterialApp(
         // Firebase Analytics
