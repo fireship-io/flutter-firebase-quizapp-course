@@ -23,7 +23,10 @@ class AuthService {
         idToken: googleAuth.idToken,
       );
 
-      FirebaseUser user = await _auth.signInWithCredential(credential);
+      AuthResult result = await _auth.signInWithCredential(credential);
+      FirebaseUser user = result.user;
+
+      // Update user data
       updateUserData(user);
 
       return user;
@@ -34,7 +37,9 @@ class AuthService {
   }
 
   Future<FirebaseUser> anonLogin() async {
-    FirebaseUser user = await _auth.signInAnonymously();
+    AuthResult result = await _auth.signInAnonymously();
+    FirebaseUser user = result.user;
+
     updateUserData(user);
     return user;
   }
@@ -54,9 +59,6 @@ class AuthService {
   }
 
 }
-
-// keytool -list -v -alias androiddebugkey -keystore %USERPROFILE%\.android\debug.keystore
-
 
 
 

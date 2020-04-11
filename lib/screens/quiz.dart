@@ -40,7 +40,7 @@ class QuizScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      builder: (_) => QuizState(),
+      create: (_) => QuizState(),
       child: FutureBuilder(
         future: Document<Quiz>(path: 'quizzes/$quizId').getData(),
         builder: (BuildContext context, AsyncSnapshot snap) {

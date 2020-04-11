@@ -1,6 +1,6 @@
 # Flutter Firebase  - The Full Course
 
-Build a QuizApp from scratch with Flutter 1.5 & Firebase. 
+Build a QuizApp from scratch with Flutter & Firebase. 
 
 ## Learn it
 
@@ -14,7 +14,7 @@ Enroll in the [Course](https://fireship.io/courses/flutter-firebase/)
 ## Run it
 
 ```
-git clone
+git clone https://github.com/fireship-io/flutter-firebase-quizapp-course.git quizapp
 cd quizapp
 
 flutter run
