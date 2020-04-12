@@ -44,7 +44,7 @@ class QuizScreen extends StatelessWidget {
       child: FutureBuilder(
         future: Document<Quiz>(path: 'quizzes/$quizId').getData(),
         builder: (BuildContext context, AsyncSnapshot snap) {
-          var state = Provider.of<QuizState>(context);
+          var state = Provider.of<QuizState>(context); // k
 
           if (!snap.hasData || snap.hasError) {
             return LoadingScreen();
@@ -195,7 +195,7 @@ class QuestionPage extends StatelessWidget {
                 child: InkWell(
                   onTap: () {
                     state.selected = opt;
-                    _bottomSheet(context, opt);
+                    _bottomSheet(context, opt, state);
                   },
                   child: Container(
                     padding: EdgeInsets.all(16),
@@ -228,9 +228,9 @@ class QuestionPage extends StatelessWidget {
   }
 
   /// Bottom sheet shown when Question is answered
-  _bottomSheet(BuildContext context, Option opt) {
+  _bottomSheet(BuildContext context, Option opt, QuizState state) {
     bool correct = opt.correct;
-    var state = Provider.of<QuizState>(context);
+
     showModalBottomSheet(
       context: context,
       builder: (BuildContext context) {
