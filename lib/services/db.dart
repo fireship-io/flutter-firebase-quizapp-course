@@ -46,8 +46,6 @@ class Collection<T> {
   Stream<List<T>> streamData() {
     return ref.snapshots().map((list) => list.documents.map((doc) => Global.models[T](doc.data) as T) );
   }
-
-
 }
 
 
@@ -61,14 +59,14 @@ class UserData<T> {
 
   Stream<T> get documentStream {
 
-    return Observable(_auth.onAuthStateChanged).switchMap((user) {
+    return _auth.onAuthStateChanged.switchMap((user) {
       if (user != null) {
           Document<T> doc = Document<T>(path: '$collection/${user.uid}'); 
           return doc.streamData();
       } else {
-          return Observable<T>.just(null);
+          return Stream<T>.value(null);
       }
-    }); //.shareReplay(maxSize: 1).doOnData((d) => print('777 $d'));// as Stream<T>;
+    });
   }
 
   Future<T> getDocument() async {

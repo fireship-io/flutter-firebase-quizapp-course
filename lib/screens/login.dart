@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import '../shared/shared.dart';
 import '../services/services.dart';
+import 'package:apple_sign_in/apple_sign_in.dart';
 
 class LoginScreen extends StatefulWidget {
   createState() => LoginScreenState();
@@ -46,6 +46,18 @@ class LoginScreenState extends State<LoginScreen> {
               icon: FontAwesomeIcons.google,
               color: Colors.black45,
               loginMethod: auth.googleSignIn,
+            ),
+            FutureBuilder<Object>(
+              future: auth.appleSignInAvailable,
+              builder: (context, snapshot) {
+                if (snapshot.data == true) {
+                  return AppleSignInButton(
+                    onPressed: auth.appleSignIn,
+                  );
+                } else {
+                  return Container();
+                }
+              },
             ),
             LoginButton(text: 'Continue as Guest', loginMethod: auth.anonLogin)
           ],

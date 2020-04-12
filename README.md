@@ -1,10 +1,10 @@
-# Flutter Firebase  - The Full Course
+# 🕊️🔥 Flutter Firebase  - The Full Course
 
-Build a QuizApp from scratch with Flutter 1.5 & Firebase. 
+Build a realtime Quiz App from scratch with Flutter & Firebase. 
 
 ## Learn it
 
-Enroll in the [Course](https://fireship.io/courses/flutter-firebase/) 
+Enroll in the [Flutter Firebase Course](https://fireship.io/courses/flutter-firebase/) on Fireship. 
 
 ## Try it
 
@@ -14,17 +14,8 @@ Enroll in the [Course](https://fireship.io/courses/flutter-firebase/)
 ## Run it
 
 ```
-git clone
+git clone https://github.com/fireship-io/flutter-firebase-quizapp-course.git quizapp
 cd quizapp
 
 flutter run
 ```
-
-# Branches
-
-1. User Authentication. - Login, logout, and navigation
-2. Firestore - Data deserialization and state management. 
-3. Quiz Topics List - FutureBuilder, Hero, and Animated Progress Bar
-4. Interactive Quiz - Advanced state management
-
-
