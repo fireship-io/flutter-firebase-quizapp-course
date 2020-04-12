@@ -1,6 +1,6 @@
-# 🕊️🔥 Flutter Firebase  - The Full Course
+# Flutter Firebase  - The Full Course
 
-Build a realtime Quiz App from scratch with Flutter & Firebase. 
+🕊️🔥 Build a realtime Quiz App from scratch with Flutter & Firebase. 
 
 ## Learn it
 
