@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../services/services.dart';
@@ -52,7 +53,12 @@ class LoginScreenState extends State<LoginScreen> {
               builder: (context, snapshot) {
                 if (snapshot.data == true) {
                   return AppleSignInButton(
-                    onPressed: auth.appleSignIn,
+                    onPressed: () async { 
+                      FirebaseUser user = await auth.appleSignIn();
+                      if (user != null) {
+                        Navigator.pushReplacementNamed(context, '/topics');
+                      }
+                    },
                   );
                 } else {
                   return Container();
