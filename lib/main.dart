@@ -17,6 +17,8 @@ class MyApp extends StatelessWidget {
         StreamProvider<FirebaseUser>.value(value: AuthService().user),
       ],
       child: MaterialApp(
+      debugShowCheckedModeBanner: false,
+        
         // Firebase Analytics
         navigatorObservers: [
           FirebaseAnalyticsObserver(analytics: FirebaseAnalytics()),
@@ -29,7 +31,7 @@ class MyApp extends StatelessWidget {
           '/profile': (context) => ProfileScreen(),
           '/about': (context) => AboutScreen(),
         },
-
+        
         // Theme
         theme: ThemeData(
           fontFamily: 'Nunito',
