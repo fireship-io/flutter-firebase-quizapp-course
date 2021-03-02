@@ -8,13 +8,12 @@ class AppBottomNav extends StatelessWidget {
       items: [
         BottomNavigationBarItem(
             icon: Icon(FontAwesomeIcons.graduationCap, size: 20),
-            title: Text('Topics')),
+            label: 'Topics'),
         BottomNavigationBarItem(
-            icon: Icon(FontAwesomeIcons.bolt, size: 20),
-            title: Text('About')),
+            icon: Icon(FontAwesomeIcons.bolt, size: 20), label: 'About'),
         BottomNavigationBarItem(
             icon: Icon(FontAwesomeIcons.userCircle, size: 20),
-            title: Text('Profile')),
+            label: 'Profile'),
       ].toList(),
       fixedColor: Colors.deepPurple[200],
       onTap: (int idx) {
