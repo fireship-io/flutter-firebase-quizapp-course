@@ -14,13 +14,9 @@ class LoginScreenState extends State<LoginScreen> {
   @override
   void initState() {
     super.initState();
-    auth.getUser.then(
-      (user) {
-        if (user != null) {
-          Navigator.pushReplacementNamed(context, '/topics');
-        }
-      },
-    );
+    if (auth.getUser != null) {
+      Navigator.pushReplacementNamed(context, '/topics');
+    }
   }
 
   @override
@@ -38,7 +34,7 @@ class LoginScreenState extends State<LoginScreen> {
             ),
             Text(
               'Login to Start',
-              style: Theme.of(context).textTheme.headline,
+              style: Theme.of(context).textTheme.headline5,
               textAlign: TextAlign.center,
             ),
             Text('Your Tagline'),
@@ -53,8 +49,8 @@ class LoginScreenState extends State<LoginScreen> {
               builder: (context, snapshot) {
                 if (snapshot.data == true) {
                   return AppleSignInButton(
-                    onPressed: () async { 
-                      FirebaseUser user = await auth.appleSignIn();
+                    onPressed: () async {
+                      User user = await auth.appleSignIn();
                       if (user != null) {
                         Navigator.pushReplacementNamed(context, '/topics');
                       }
