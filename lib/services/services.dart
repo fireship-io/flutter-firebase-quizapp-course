@@ -1,4 +1,3 @@
 export 'auth.dart';
+export 'firestore.dart';
 export 'models.dart';
-export 'db.dart';
-export 'globals.dart';

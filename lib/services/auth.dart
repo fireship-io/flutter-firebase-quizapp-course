@@ -1,97 +1,93 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:apple_sign_in/apple_sign_in.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'dart:async';
+
+import 'dart:convert';
+import 'dart:math';
+import 'package:crypto/crypto.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 class AuthService {
-  final GoogleSignIn _googleSignIn = GoogleSignIn();
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-  final FirebaseFirestore _db = FirebaseFirestore.instance;
+  final userStream = FirebaseAuth.instance.authStateChanges();
+  final user = FirebaseAuth.instance.currentUser;
 
-  // Firebase user one-time fetch
-  User get getUser => _auth.currentUser;
-
-  // Firebase user a realtime stream
-  Stream<User> get user => _auth.authStateChanges();
-
-  // Determine if Apple Signin is available on device
-  Future<bool> get appleSignInAvailable => AppleSignIn.isAvailable();
-
-  /// Sign in with Apple
-  Future<User> appleSignIn() async {
+  Future<void> googleLogin() async {
     try {
-      final AuthorizationResult appleResult =
-          await AppleSignIn.performRequests([
-        AppleIdRequest(requestedScopes: [Scope.email, Scope.fullName])
-      ]);
+      final googleUser = await GoogleSignIn().signIn();
 
-      if (appleResult.error != null) {
-        // handle errors from Apple
-      }
+      if (googleUser == null) return;
 
-      final AuthCredential credential = OAuthProvider('apple.com').credential(
-        accessToken:
-            String.fromCharCodes(appleResult.credential.authorizationCode),
-        idToken: String.fromCharCodes(appleResult.credential.identityToken),
-      );
-
-      UserCredential firebaseResult =
-          await _auth.signInWithCredential(credential);
-      User user = firebaseResult.user;
-
-      // Update user data
-      updateUserData(user);
-
-      return user;
-    } catch (error) {
-      print(error);
-      return null;
-    }
-  }
-
-  /// Sign in with Google
-  Future<User> googleSignIn() async {
-    try {
-      GoogleSignInAccount googleSignInAccount = await _googleSignIn.signIn();
-      GoogleSignInAuthentication googleAuth =
-          await googleSignInAccount.authentication;
-
-      final AuthCredential credential = GoogleAuthProvider.credential(
+      final googleAuth = await googleUser.authentication;
+      final authCredential = GoogleAuthProvider.credential(
         accessToken: googleAuth.accessToken,
         idToken: googleAuth.idToken,
       );
 
-      UserCredential result = await _auth.signInWithCredential(credential);
-      User user = result.user;
-
-      // Update user data
-      updateUserData(user);
-
-      return user;
-    } catch (error) {
-      print(error);
-      return null;
+      await FirebaseAuth.instance.signInWithCredential(authCredential);
+    } on FirebaseAuthException catch (e) {
+      AlertDialog(
+        title: const Text("Error"),
+        content: Text('Failed to sign in with Google: ${e.message}'),
+      );
     }
   }
 
   /// Anonymous Firebase login
-  Future<User> anonLogin() async {
-    final User user = (await _auth.signInAnonymously()).user;
-    updateUserData(user);
-    return user;
+  Future<void> anonLogin() async {
+    try {
+      await FirebaseAuth.instance.signInAnonymously();
+    } on FirebaseAuthException catch (e) {
+      AlertDialog(
+        title: const Text("Error"),
+        content: Text('Failed to sign in Anonymously: ${e.message}'),
+      );
+    }
   }
 
-  /// Updates the User's data in Firestore on each new login
-  Future<void> updateUserData(User user) {
-    DocumentReference reportRef = _db.collection('reports').doc(user.uid);
-
-    return reportRef.set({'uid': user.uid, 'lastActivity': DateTime.now()},
-        SetOptions(merge: true));
+  Future<void> signOut() async {
+    await FirebaseAuth.instance.signOut();
   }
 
-  // Sign out
-  Future<void> signOut() {
-    return _auth.signOut();
+  String generateNonce([int length = 32]) {
+    const charset =
+        '0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._';
+    final random = Random.secure();
+    return List.generate(length, (_) => charset[random.nextInt(charset.length)])
+        .join();
+  }
+
+  /// Returns the sha256 hash of [input] in hex notation.
+  String sha256ofString(String input) {
+    final bytes = utf8.encode(input);
+    final digest = sha256.convert(bytes);
+    return digest.toString();
+  }
+
+  Future<UserCredential> signInWithApple() async {
+    // To prevent replay attacks with the credential returned from Apple, we
+    // include a nonce in the credential request. When signing in with
+    // Firebase, the nonce in the id token returned by Apple, is expected to
+    // match the sha256 hash of `rawNonce`.
+    final rawNonce = generateNonce();
+    final nonce = sha256ofString(rawNonce);
+
+    // Request credential for the currently signed in Apple account.
+    final appleCredential = await SignInWithApple.getAppleIDCredential(
+      scopes: [
+        AppleIDAuthorizationScopes.email,
+        AppleIDAuthorizationScopes.fullName,
+      ],
+      nonce: nonce,
+    );
+
+    // Create an `OAuthCredential` from the credential returned by Apple.
+    final oauthCredential = OAuthProvider("apple.com").credential(
+      idToken: appleCredential.identityToken,
+      rawNonce: rawNonce,
+    );
+
+    // Sign in the user with Firebase. If the nonce we generated earlier does
+    // not match the nonce in `appleCredential.identityToken`, sign in will fail.
+    return await FirebaseAuth.instance.signInWithCredential(oauthCredential);
   }
 }
