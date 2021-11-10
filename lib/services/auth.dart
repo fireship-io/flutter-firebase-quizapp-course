@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 import 'dart:convert';
@@ -25,10 +24,7 @@ class AuthService {
 
       await FirebaseAuth.instance.signInWithCredential(authCredential);
     } on FirebaseAuthException catch (e) {
-      AlertDialog(
-        title: const Text("Error"),
-        content: Text('Failed to sign in with Google: ${e.message}'),
-      );
+        // handle error
     }
   }
 
@@ -37,10 +33,7 @@ class AuthService {
     try {
       await FirebaseAuth.instance.signInAnonymously();
     } on FirebaseAuthException catch (e) {
-      AlertDialog(
-        title: const Text("Error"),
-        content: Text('Failed to sign in Anonymously: ${e.message}'),
-      );
+      // handle error
     }
   }
 

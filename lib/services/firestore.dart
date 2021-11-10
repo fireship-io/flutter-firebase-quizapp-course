@@ -16,7 +16,14 @@ class FirestoreService {
     return topics.toList();
   }
 
-  /// Listens to current user's report document in Firestore
+  /// Retrieves a single quiz document
+  Future<Quiz> getQuiz(String quizId) async {
+    var ref = _db.collection('quizzes').doc(quizId);
+    var snapshot = await ref.get();
+    return Quiz.fromJson(snapshot.data() ?? {});
+  }
+
+    /// Listens to current user's report document in Firestore
   Stream<Report> streamReport() {
     return AuthService().userStream.switchMap((user) {
       if (user != null) {
@@ -26,13 +33,6 @@ class FirestoreService {
         return Stream.fromIterable([Report()]);
       }
     });
-  }
-
-  /// Retrieves a single quiz document
-  Future<Quiz> getQuiz(String quizId) async {
-    var ref = _db.collection('quizzes').doc(quizId);
-    var snapshot = await ref.get();
-    return Quiz.fromJson(snapshot.data() ?? {});
   }
 
   /// Updates the current user's report document after completing quiz
