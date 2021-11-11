@@ -59,8 +59,7 @@ class QuizScreen extends StatelessWidget {
 
 class StartPage extends StatelessWidget {
   final Quiz quiz;
-  final PageController? controller;
-  const StartPage({Key? key, required this.quiz, this.controller})
+  const StartPage({Key? key, required this.quiz})
       : super(key: key);
 
   @override
