@@ -20,6 +20,5 @@ Enroll in the [Flutter Firebase Course](https://fireship.io/courses/flutter-fire
 ```
 git clone https://github.com/fireship-io/flutter-firebase-quizapp-course.git quizapp
 cd quizapp
-
 flutter run
 ```
