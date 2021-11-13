@@ -38,14 +38,12 @@ class LoginScreen extends StatelessWidget {
                 }
               },
             ),
-            Flexible(
-              child: LoginButton(
-                icon: FontAwesomeIcons.userNinja,
-                text: 'Continue as Guest',
-                loginMethod: AuthService().anonLogin,
-                color: Colors.deepPurple,
-              ),
-            )
+            LoginButton(
+              icon: FontAwesomeIcons.userNinja,
+              text: 'Continue as Guest',
+              loginMethod: AuthService().anonLogin,
+              color: Colors.deepPurple,
+            ),
           ],
         ),
       ),
