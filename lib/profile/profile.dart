@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:quizapp/services/auth.dart';
-import 'package:quizapp/services/models.dart';
-import 'package:quizapp/shared/loading.dart';
+import 'package:quizapp/services/services.dart';
+import 'package:quizapp/shared/shared.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    Report report = Provider.of<Report>(context);
+    var report = Provider.of<Report>(context);
     var user = AuthService().user;
 
     if (user != null) {
@@ -57,7 +56,7 @@ class ProfileScreen extends StatelessWidget {
         ),
       );
     } else {
-      return Loader();
+      return const Loader();
     }
   }
 }
