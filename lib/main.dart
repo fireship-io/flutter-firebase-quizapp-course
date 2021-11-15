@@ -29,13 +29,14 @@ class _AppState extends State<App> {
       builder: (context, snapshot) {
         // Check for errors
         if (snapshot.hasError) {
-          return ErrorMessage(message: snapshot.error.toString());
+          // Error screen
         }
 
         // Once complete, show your application
         if (snapshot.connectionState == ConnectionState.done) {
           return StreamProvider(
             create: (_) => FirestoreService().streamReport(),
+            catchError: (_, err) => Report(),
             initialData: Report(),
             child: MaterialApp(
               debugShowCheckedModeBanner: true,
@@ -46,7 +47,7 @@ class _AppState extends State<App> {
         }
 
         // Otherwise, show something whilst waiting for initialization to complete
-        return const LoadingScreen();
+        return const MaterialApp(home: LoadingScreen());
       },
     );
   }
