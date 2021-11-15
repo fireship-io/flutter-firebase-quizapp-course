@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import '../services/services.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:quizapp/services/models.dart';
 import 'package:provider/provider.dart';
 
 class AnimatedProgressbar extends StatelessWidget {
   final double value;
   final double height;
 
-  AnimatedProgressbar({Key key, @required this.value, this.height = 12})
+  const AnimatedProgressbar({Key? key, required this.value, this.height = 12})
       : super(key: key);
 
   @override
@@ -15,7 +14,7 @@ class AnimatedProgressbar extends StatelessWidget {
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints box) {
         return Container(
-          padding: EdgeInsets.all(10),
+          padding: const EdgeInsets.all(10),
           width: box.maxWidth,
           child: Stack(
             children: [
@@ -29,7 +28,7 @@ class AnimatedProgressbar extends StatelessWidget {
                 ),
               ),
               AnimatedContainer(
-                duration: Duration(milliseconds: 800),
+                duration: const Duration(milliseconds: 800),
                 curve: Curves.easeOutCubic,
                 height: height,
                 width: box.maxWidth * _floor(value),
@@ -58,32 +57,10 @@ class AnimatedProgressbar extends StatelessWidget {
   }
 }
 
-class QuizBadge extends StatelessWidget {
-  final String quizId;
-  final Topic topic;
-
-  const QuizBadge({Key key, this.quizId, this.topic}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    Report report = Provider.of<Report>(context);
-
-    if (report != null) {
-      List completed = report.topics[topic.id];
-      if (completed != null && completed.contains(quizId)) {
-        return Icon(FontAwesomeIcons.checkDouble, color: Colors.green);
-      } else {
-        return Icon(FontAwesomeIcons.solidCircle, color: Colors.grey);
-      }
-    } else {
-      return Icon(FontAwesomeIcons.circle, color: Colors.grey);
-    }
-  }
-}
-
 class TopicProgress extends StatelessWidget {
+  const TopicProgress({Key? key, required this.topic}) : super(key: key);
+
   final Topic topic;
-  const TopicProgress({Key key, this.topic}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -100,17 +77,13 @@ class TopicProgress extends StatelessWidget {
   }
 
   Widget _progressCount(Report report, Topic topic) {
-    if (report != null && topic != null) {
-      return Padding(
-        padding: const EdgeInsets.only(left: 8),
-        child: Text(
-          '${report.topics[topic.id]?.length ?? 0} / ${topic?.quizzes?.length ?? 0}',
-          style: TextStyle(fontSize: 10, color: Colors.grey),
-        ),
-      );
-    } else {
-      return Container();
-    }
+    return Padding(
+      padding: const EdgeInsets.only(left: 8),
+      child: Text(
+        '${report.topics[topic.id]?.length ?? 0} / ${topic.quizzes.length}',
+        style: const TextStyle(fontSize: 10, color: Colors.grey),
+      ),
+    );
   }
 
   double _calculateProgress(Topic topic, Report report) {

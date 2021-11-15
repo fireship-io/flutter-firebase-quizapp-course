@@ -1,60 +1,53 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_analytics/observer.dart';
-import 'package:firebase_analytics/firebase_analytics.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'services/services.dart';
-import 'screens/screens.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
+import 'package:quizapp/routes.dart';
+import 'package:quizapp/services/services.dart';
+import 'package:quizapp/shared/shared.dart';
+import 'package:quizapp/theme.dart';
 
-Future<void> main() async {
+void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-
-  runApp(MyApp());
+  runApp(const App());
 }
 
-class MyApp extends StatelessWidget {
+class App extends StatefulWidget {
+  const App({Key? key}) : super(key: key);
+
+  @override
+  _AppState createState() => _AppState();
+}
+
+class _AppState extends State<App> {
+  final Future<FirebaseApp> _initialization = Firebase.initializeApp();
+
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        StreamProvider<Report>.value(value: Global.reportRef.documentStream),
-        StreamProvider<User>.value(value: AuthService().user),
-      ],
-      child: MaterialApp(
-      debugShowCheckedModeBanner: false,
-        
-        // Firebase Analytics
-        navigatorObservers: [
-          FirebaseAnalyticsObserver(analytics: FirebaseAnalytics()),
-        ],
+    return FutureBuilder(
+      // Initialize FlutterFire:
+      future: _initialization,
+      builder: (context, snapshot) {
+        // Check for errors
+        if (snapshot.hasError) {
+          return ErrorMessage(message: snapshot.error.toString());
+        }
 
-        // Named Routes
-        routes: {
-          '/': (context) => LoginScreen(),
-          '/topics': (context) => TopicsScreen(),
-          '/profile': (context) => ProfileScreen(),
-          '/about': (context) => AboutScreen(),
-        },
-        
-        // Theme
-        theme: ThemeData(
-          fontFamily: 'Nunito',
-          bottomAppBarTheme: BottomAppBarTheme(
-            color: Colors.black87,
-          ),
-          brightness: Brightness.dark,
-          textTheme: TextTheme(
-            body1: TextStyle(fontSize: 18),
-            body2: TextStyle(fontSize: 16),
-            button: TextStyle(letterSpacing: 1.5, fontWeight: FontWeight.bold),
-            headline: TextStyle(fontWeight: FontWeight.bold),
-            subhead: TextStyle(color: Colors.grey),
-          ),
-          buttonTheme: ButtonThemeData(),
-        ),
-      ),
+        // Once complete, show your application
+        if (snapshot.connectionState == ConnectionState.done) {
+          return StreamProvider(
+            create: (_) => FirestoreService().streamReport(),
+            initialData: Report(),
+            child: MaterialApp(
+              debugShowCheckedModeBanner: true,
+              routes: appRoutes,
+              theme: appTheme
+            ),
+          );
+        }
+
+        // Otherwise, show something whilst waiting for initialization to complete
+        return const LoadingScreen();
+      },
     );
   }
 }
