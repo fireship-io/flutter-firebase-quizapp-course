@@ -21,7 +21,7 @@ class QuizScreen extends StatelessWidget {
           var state = Provider.of<QuizState>(context);
 
           if (!snapshot.hasData || snapshot.hasError) {
-            return Loader();
+            return const Loader();
           } else {
             var quiz = snapshot.data!;
 
@@ -29,7 +29,7 @@ class QuizScreen extends StatelessWidget {
               appBar: AppBar(
                 title: AnimatedProgressbar(value: state.progress),
                 leading: IconButton(
-                  icon: const Icon(FontAwesomeIcons.times),
+                  icon: const Icon(FontAwesomeIcons.xmark),
                   onPressed: () => Navigator.pop(context),
                 ),
               ),
@@ -59,8 +59,7 @@ class QuizScreen extends StatelessWidget {
 
 class StartPage extends StatelessWidget {
   final Quiz quiz;
-  const StartPage({Key? key, required this.quiz})
-      : super(key: key);
+  const StartPage({Key? key, required this.quiz}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -167,7 +166,7 @@ class QuestionPage extends StatelessWidget {
                       children: [
                         Icon(
                             state.selected == opt
-                                ? FontAwesomeIcons.checkCircle
+                                ? FontAwesomeIcons.circleCheck
                                 : FontAwesomeIcons.circle,
                             size: 30),
                         Expanded(
