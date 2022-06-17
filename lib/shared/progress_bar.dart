@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:quizapp/services/models.dart';
 import 'package:provider/provider.dart';
+import 'package:quizapp/services/models.dart';
 
 class AnimatedProgressbar extends StatelessWidget {
   final double value;
   final double height;
 
-  const AnimatedProgressbar({Key? key, required this.value, this.height = 12})
-      : super(key: key);
+  const AnimatedProgressbar({super.key, required this.value, this.height = 12});
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +57,7 @@ class AnimatedProgressbar extends StatelessWidget {
 }
 
 class TopicProgress extends StatelessWidget {
-  const TopicProgress({Key? key, required this.topic}) : super(key: key);
+  const TopicProgress({super.key, required this.topic});
 
   final Topic topic;
 

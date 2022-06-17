@@ -6,7 +6,7 @@ import 'package:quizapp/topics/drawer.dart';
 import 'package:quizapp/topics/topic_item.dart';
 
 class TopicsScreen extends StatelessWidget {
-  const TopicsScreen({Key? key}) : super(key: key);
+  const TopicsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

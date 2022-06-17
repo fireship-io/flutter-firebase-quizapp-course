@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:quizapp/login/login.dart';
+import 'package:quizapp/services/auth.dart';
 import 'package:quizapp/shared/shared.dart';
 import 'package:quizapp/topics/topics.dart';
-import 'package:quizapp/services/auth.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
