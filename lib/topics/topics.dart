@@ -6,7 +6,7 @@ import 'package:quizapp/topics/drawer.dart';
 import 'package:quizapp/topics/topic_item.dart';
 
 class TopicsScreen extends StatelessWidget {
-  const TopicsScreen({Key? key}) : super(key: key);
+  const TopicsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@ class TopicsScreen extends StatelessWidget {
               actions: [
                 IconButton(
                   icon: Icon(
-                    FontAwesomeIcons.userCircle,
+                    FontAwesomeIcons.circleUser,
                     color: Colors.pink[200],
                   ),
                   onPressed: () => Navigator.pushNamed(context, '/profile'),
@@ -53,4 +53,3 @@ class TopicsScreen extends StatelessWidget {
     );
   }
 }
-

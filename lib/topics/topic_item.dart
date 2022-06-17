@@ -5,7 +5,7 @@ import 'package:quizapp/topics/drawer.dart';
 
 class TopicItem extends StatelessWidget {
   final Topic topic;
-  const TopicItem({ Key? key, required this.topic}) : super(key: key);
+  const TopicItem({super.key, required this.topic});
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +60,7 @@ class TopicItem extends StatelessWidget {
 class TopicScreen extends StatelessWidget {
   final Topic topic;
 
-  const TopicScreen({Key? key,required this.topic}) : super(key: key);
+  const TopicScreen({super.key, required this.topic});
 
   @override
   Widget build(BuildContext context) {
@@ -76,8 +76,8 @@ class TopicScreen extends StatelessWidget {
         ),
         Text(
           topic.title,
-          style:
-              const TextStyle(height: 2, fontSize: 20, fontWeight: FontWeight.bold),
+          style: const TextStyle(
+              height: 2, fontSize: 20, fontWeight: FontWeight.bold),
         ),
         QuizList(topic: topic)
       ]),

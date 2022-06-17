@@ -3,9 +3,14 @@ import 'package:provider/provider.dart';
 import 'package:quizapp/services/services.dart';
 import 'package:quizapp/shared/shared.dart';
 
-class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({Key? key}) : super(key: key);
+class ProfileScreen extends StatefulWidget {
+  const ProfileScreen({super.key});
 
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     var report = Provider.of<Report>(context);
@@ -46,8 +51,10 @@ class ProfileScreen extends StatelessWidget {
                 child: const Text('logout'),
                 onPressed: () async {
                   await AuthService().signOut();
-                  Navigator.of(context)
-                      .pushNamedAndRemoveUntil('/', (route) => false);
+                  if (mounted) {
+                    Navigator.of(context)
+                        .pushNamedAndRemoveUntil('/', (route) => false);
+                  }
                 },
               ),
               const Spacer(),

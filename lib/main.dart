@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:quizapp/routes.dart';
 import 'package:quizapp/services/services.dart';
@@ -12,10 +12,10 @@ void main() {
 }
 
 class App extends StatefulWidget {
-  const App({Key? key}) : super(key: key);
+  const App({super.key});
 
   @override
-  _AppState createState() => _AppState();
+  State<App> createState() => _AppState();
 }
 
 class _AppState extends State<App> {
@@ -39,10 +39,9 @@ class _AppState extends State<App> {
             catchError: (_, err) => Report(),
             initialData: Report(),
             child: MaterialApp(
-              debugShowCheckedModeBanner: true,
-              routes: appRoutes,
-              theme: appTheme
-            ),
+                debugShowCheckedModeBanner: true,
+                routes: appRoutes,
+                theme: appTheme),
           );
         }
 

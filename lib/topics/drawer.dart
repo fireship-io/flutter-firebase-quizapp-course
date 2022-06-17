@@ -4,10 +4,9 @@ import 'package:provider/provider.dart';
 import 'package:quizapp/quiz/quiz.dart';
 import 'package:quizapp/services/models.dart';
 
-
 class TopicDrawer extends StatelessWidget {
   final List<Topic> topics;
-  const TopicDrawer({ Key? key, required this.topics}) : super(key: key);
+  const TopicDrawer({super.key, required this.topics});
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +42,7 @@ class TopicDrawer extends StatelessWidget {
 
 class QuizList extends StatelessWidget {
   final Topic topic;
-  const QuizList({Key? key, required this.topic}) : super(key: key);
+  const QuizList({super.key, required this.topic});
 
   @override
   Widget build(BuildContext context) {
@@ -91,8 +90,7 @@ class QuizBadge extends StatelessWidget {
   final String quizId;
   final Topic topic;
 
-  const QuizBadge({Key? key, required this.quizId, required this.topic})
-      : super(key: key);
+  const QuizBadge({super.key, required this.quizId, required this.topic});
 
   @override
   Widget build(BuildContext context) {
