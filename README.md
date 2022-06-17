@@ -1,10 +1,10 @@
-# Flutter Firebase  - The Full Course 2.0
+# Flutter Firebase - The Full Course 2.0
 
-🕊️🔥 Build a realtime Quiz App from scratch with Flutter 2 & Firebase. 
+🕊️🔥 Build a realtime Quiz App from scratch with Flutter 3 & Firebase.
 
 ## Learn it
 
-Enroll in the [Flutter Firebase Course](https://fireship.io/courses/flutter-firebase/) on Fireship. 
+Enroll in the [Flutter Firebase Course](https://fireship.io/courses/flutter-firebase/) on Fireship.
 
 ## Try it
 
@@ -22,11 +22,11 @@ flutter run
 
 ## Learning Goals
 
-- 👨‍🎤 Build a complete Flutter app with Firebase 
+- 👨‍🎤 Build a complete Flutter app with Firebase
 - 🐦 Master most common Flutter widgets
 - 🔏 User Authentication (Apple, Google, Anonymous)
 - ⚒️ State Management with Provider
-- 🔥 Model relational Firestore data 
+- 🔥 Model relational Firestore data
 - 🎭 Animation for realtime data streams
 - ⚓ Organize large Flutter projects
 - 🤖 Firestore -> Dart Classes with JSON Serializable
