@@ -8,7 +8,7 @@ import 'package:quizapp/shared/loading.dart';
 import 'package:quizapp/shared/progress_bar.dart';
 
 class QuizScreen extends StatelessWidget {
-  const QuizScreen({Key? key, required this.quizId}) : super(key: key);
+  const QuizScreen({super.key, required this.quizId});
   final String quizId;
 
   @override
@@ -59,7 +59,7 @@ class QuizScreen extends StatelessWidget {
 
 class StartPage extends StatelessWidget {
   final Quiz quiz;
-  const StartPage({Key? key, required this.quiz}) : super(key: key);
+  const StartPage({super.key, required this.quiz});
 
   @override
   Widget build(BuildContext context) {
@@ -91,7 +91,7 @@ class StartPage extends StatelessWidget {
 
 class CongratsPage extends StatelessWidget {
   final Quiz quiz;
-  const CongratsPage({Key? key, required this.quiz}) : super(key: key);
+  const CongratsPage({super.key, required this.quiz});
 
   @override
   Widget build(BuildContext context) {
@@ -130,7 +130,7 @@ class CongratsPage extends StatelessWidget {
 
 class QuestionPage extends StatelessWidget {
   final Question question;
-  const QuestionPage({Key? key, required this.question}) : super(key: key);
+  const QuestionPage({super.key, required this.question});
 
   @override
   Widget build(BuildContext context) {

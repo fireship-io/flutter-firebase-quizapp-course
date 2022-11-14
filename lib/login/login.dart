@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:sign_in_with_apple/sign_in_with_apple.dart';
-import 'package:quizapp/services/auth.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:quizapp/services/auth.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 class LoginScreen extends StatelessWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+  const LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -58,12 +58,11 @@ class LoginButton extends StatelessWidget {
   final Function loginMethod;
 
   const LoginButton(
-      {Key? key,
+      {super.key,
       required this.text,
       required this.icon,
       required this.color,
-      required this.loginMethod})
-      : super(key: key);
+      required this.loginMethod});
 
   @override
   Widget build(BuildContext context) {
