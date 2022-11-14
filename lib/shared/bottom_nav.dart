@@ -24,7 +24,7 @@ class BottomNavBar extends StatelessWidget {
         ),
         BottomNavigationBarItem(
           icon: Icon(
-            FontAwesomeIcons.userCircle,
+            FontAwesomeIcons.circleUser,
             size: 20,
           ),
           label: 'Profile',
