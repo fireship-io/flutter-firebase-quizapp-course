@@ -23,7 +23,7 @@ class AuthService {
       );
 
       await FirebaseAuth.instance.signInWithCredential(authCredential);
-    } on FirebaseAuthException catch (_) {
+    } on FirebaseAuthException {
       // handle error
     }
   }

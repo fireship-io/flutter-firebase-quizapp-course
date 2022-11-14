@@ -211,7 +211,7 @@ class QuestionPage extends StatelessWidget {
               ),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                    primary: correct ? Colors.green : Colors.red),
+                    backgroundColor: correct ? Colors.green : Colors.red),
                 child: Text(
                   correct ? 'Onward!' : 'Try Again',
                   style: const TextStyle(

@@ -53,7 +53,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   await AuthService().signOut();
                   if (mounted) {
                     Navigator.of(context)
-                        .pushNamedAndRemoveUntil('/', (route) => false);
+                        .pushNamedAndRemoveUntil('/', (_) => false);
                   }
                 },
               ),
