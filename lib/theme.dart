@@ -8,16 +8,16 @@ var appTheme = ThemeData(
   ),
   brightness: Brightness.dark,
   textTheme: const TextTheme(
-    bodyText1: TextStyle(fontSize: 18),
-    bodyText2: TextStyle(fontSize: 16),
-    button: TextStyle(
+    bodyLarge: TextStyle(fontSize: 18),
+    bodyMedium: TextStyle(fontSize: 16),
+    labelLarge: TextStyle(
       letterSpacing: 1.5,
       fontWeight: FontWeight.bold,
     ),
-    headline1: TextStyle(
+    displayLarge: TextStyle(
       fontWeight: FontWeight.bold,
     ),
-    subtitle1: TextStyle(
+    titleMedium: TextStyle(
       color: Colors.grey,
     ),
   ),
